@@ -1,27 +1,26 @@
-// Calculator.js
-import React, { useState } from "react";
+// Tracker.js
+import React, { useState, useEffect } from "react";
 
-const Calculator = () => {
-  const [input, setInput] = useState(""); // You might need multiple state variables for different inputs
+const Tracker = () => {
+  const [data, setData] = useState([]); // Assume data is an array of objects with date and carbonFootprint properties
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add logic to calculate carbon footprint based on input
-  };
+  useEffect(() => {
+    // Fetch user's carbon footprint data from the server
+    // Update the state with the fetched data
+  }, []); // Empty dependency array means this useEffect runs once when the component mounts
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Enter Data:
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-      </label>
-      <button type="submit">Calculate</button>
-    </form>
+    <div>
+      <h2>Your Carbon Footprint Over Time</h2>
+      <ul>
+        {data.map((entry) => (
+          <li key={entry.date}>
+            {entry.date}: {entry.carbonFootprint} kg CO2
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
-export default Calculator;
+export default Tracker;
